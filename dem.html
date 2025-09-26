@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebDriver BiDi vs Playwright Guide</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a2332 0%, #2d4a67 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(26, 35, 50, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .main-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #87ceeb;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            background: rgba(45, 74, 103, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #4fc3f7;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4fc3f7;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .point {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .point::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+        
+        .point-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+        
+        .point-desc {
+            font-size: 14px;
+            color: #b0c4de;
+            line-height: 1.4;
+        }
+        
+        .comparison-section {
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #4a90e2;
+        }
+        
+        .comparison-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4a90e2;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+        
+        .vs-item {
+            text-align: center;
+        }
+        
+        .vs-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .playwright {
+            color: #e91e63;
+            background: rgba(233, 30, 99, 0.1);
+        }
+        
+        .bidi {
+            color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .vs-divider {
+            font-size: 36px;
+            font-weight: 900;
+            color: #4fc3f7;
+            align-self: center;
+        }
+        
+        .bottom-section {
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid #4caf50;
+        }
+        
+        .bottom-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4caf50;
+            margin-bottom: 15px;
+        }
+        
+        .bottom-text {
+            font-size: 16px;
+            color: #fff;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid, .vs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title {
+                font-size: 36px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="main-title">WebDriver BiDi vs Playwright</div>
+            <div class="subtitle">The Complete Guide to Browser Automation's Future</div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">🚀</span>
+                    What is WebDriver BiDi?
+                </div>
+                <div class="point">
+                    <div class="point-title">Two-way Communication</div>
+                    <div class="point-desc">Unlike WebDriver's walkie-talkie approach, BiDi works like a phone call</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">Real-time Events</div>
+                    <div class="point-desc">Instantly react to JS errors, network requests, console messages</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">W3C Standard</div>
+                    <div class="point-desc">Backed by all major browser vendors for cross-browser consistency</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📊</span>
+                    Current Implementation Status
+                </div>
+                <div class="point">
+                    <div class="point-title">Firefox: ~85% Ready</div>
+                    <div class="point-desc">Leading BiDi implementation with 3382/3993 tests passing</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">Chromium: In Progress</div>
+                    <div class="point-desc">Good coverage with ongoing improvements</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">WebKit: Early Stages</div>
+                    <div class="point-desc">Safari support catching up gradually</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-section">
+            <div class="comparison-title">2025 Reality Check</div>
+            <div class="vs-grid">
+                <div class="vs-item">
+                    <div class="vs-title playwright">🎭 Playwright Today</div>
+                    <div class="point">
+                        <div class="point-title">Batteries Included</div>
+                        <div class="point-desc">E2E + API testing, built-in runner, auto-waiting</div>
+                    </div>
+                    <div class="point">
+                        <div class="point-title">Enhanced Browsers</div>
+                        <div class="point-desc">Ships with extra hooks for consistent features</div>
+                    </div>
+                    <div class="point">
+                        <div class="point-title">BiDi Ready</div>
+                        <div class="point-desc">85% tests pass via BiDi, same APIs underneath</div>
+                    </div>
+                </div>
+                
+                <div class="vs-divider">VS</div>
+                
+                <div class="vs-item">
+                    <div class="vs-title bidi">🌐 Selenium + BiDi</div>
+                    <div class="point">
+                        <div class="point-title">Partial BiDi Support</div>
+                        <div class="point-desc">Available since v4, but still developing</div>
+                    </div>
+                    <div class="point">
+                        <div class="point-title">CDP Dependency</div>
+                        <div class="point-desc">Advanced features still require Chromium-only CDP</div>
+                    </div>
+                    <div class="point">
+                        <div class="point-title">Future Promise</div>
+                        <div class="point-desc">Will gain true cross-browser parity via BiDi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">⚡</span>
+                    Key Advantages: BiDi
+                </div>
+                <div class="point">
+                    <div class="point-title">Cross-browser Standard</div>
+                    <div class="point-desc">One protocol works everywhere</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">Real Browser Testing</div>
+                    <div class="point-desc">No modified engines, actual user browsers</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">Tool Agnostic</div>
+                    <div class="point-desc">Works with any framework</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">💪</span>
+                    Key Advantages: Playwright
+                </div>
+                <div class="point">
+                    <div class="point-title">Superior Developer Experience</div>
+                    <div class="point-desc">Zero setup, built-in everything</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">Advanced Features Today</div>
+                    <div class="point-desc">Network mocking, tracing, HAR recording</div>
+                </div>
+                <div class="point">
+                    <div class="point-title">Battle-tested Maturity</div>
+                    <div class="point-desc">Production-ready since 2020</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="bottom-title">🔥 The Bottom Line</div>
+            <div class="bottom-text">
+                <strong class="highlight">"Selenium walked so Playwright + BiDi could run"</strong><br><br>
+                The future isn't Playwright vs BiDi — it's <strong>BiDi powering both</strong>, with Playwright leading on developer experience. Choose Playwright for immediate productivity, while BiDi becomes the universal protocol underneath.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
